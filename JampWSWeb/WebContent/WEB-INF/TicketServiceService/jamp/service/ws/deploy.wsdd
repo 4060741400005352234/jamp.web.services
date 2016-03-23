@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from TicketServiceService WSDL service -->
+
+  <service name="TicketService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://ws.service.jamp"/>
+      <parameter name="wsdlServiceElement" value="TicketServiceService"/>
+      <parameter name="schemaQualified" value="http://ws.service.jamp,http://response.jamp,http://request.jamp,http://dto.model"/>
+      <parameter name="wsdlServicePort" value="TicketService"/>
+      <parameter name="className" value="jamp.service.ws.TicketService"/>
+      <parameter name="wsdlPortType" value="TicketService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://ws.service.jamp" xmlns:retNS="http://ws.service.jamp" xmlns:rtns="http://response.jamp" name="returnTicket" qname="operNS:returnTicket" returnQName="retNS:returnTicketReturn" returnType="rtns:TicketResponse" soapAction="">
+        <parameter xmlns:pns="http://ws.service.jamp" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:ticketId" type="tns:long"/>
+      </operation>
+      <operation xmlns:operNS="http://ws.service.jamp" xmlns:retNS="http://ws.service.jamp" xmlns:rtns="http://response.jamp" name="reserveTicket" qname="operNS:reserveTicket" returnQName="retNS:reserveTicketReturn" returnType="rtns:ReserveResponse" soapAction="">
+        <parameter xmlns:pns="http://ws.service.jamp" xmlns:tns="http://request.jamp" qname="pns:request" type="tns:ReserveRequest"/>
+      </operation>
+      <operation xmlns:operNS="http://ws.service.jamp" xmlns:retNS="http://ws.service.jamp" xmlns:rtns="http://response.jamp" name="getTicketInfo" qname="operNS:getTicketInfo" returnQName="retNS:getTicketInfoReturn" returnType="rtns:TicketinfoResponse" soapAction="">
+        <parameter xmlns:pns="http://ws.service.jamp" xmlns:tns="http://request.jamp" qname="pns:request" type="tns:TicketInfoRequest"/>
+      </operation>
+      <operation xmlns:operNS="http://ws.service.jamp" xmlns:retNS="http://ws.service.jamp" xmlns:rtns="http://response.jamp" name="payForTicket" qname="operNS:payForTicket" returnQName="retNS:payForTicketReturn" returnType="rtns:TicketResponse" soapAction="">
+        <parameter xmlns:pns="http://ws.service.jamp" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:ticketId" type="tns:long"/>
+      </operation>
+      <parameter name="allowedMethods" value="reserveTicket getTicketInfo returnTicket payForTicket"/>
+
+      <typeMapping xmlns:ns="http://ws.service.jamp" qname="ns:&gt;getTicketInfoResponse" type="java:jamp.service.ws.GetTicketInfoResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://dto.model" qname="ns:PassangerInfo" type="java:model.dto.PassangerInfo" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://response.jamp" qname="ns:TicketinfoResponse" type="java:jamp.response.TicketinfoResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://response.jamp" qname="ns:TicketResponse" type="java:jamp.response.TicketResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://dto.model" qname="ns:TicketInfo" type="java:model.dto.TicketInfo" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.service.jamp" qname="ns:&gt;getTicketInfo" type="java:jamp.service.ws.GetTicketInfo" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.service.jamp" qname="ns:&gt;payForTicketResponse" type="java:jamp.service.ws.PayForTicketResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://response.jamp" qname="ns:ReserveResponse" type="java:jamp.response.ReserveResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://request.jamp" qname="ns:TicketInfoRequest" type="java:jamp.request.TicketInfoRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://request.jamp" qname="ns:ReserveRequest" type="java:jamp.request.ReserveRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.service.jamp" qname="ns:&gt;reserveTicketResponse" type="java:jamp.service.ws.ReserveTicketResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.service.jamp" qname="ns:&gt;payForTicket" type="java:jamp.service.ws.PayForTicket" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
