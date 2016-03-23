@@ -13,4 +13,10 @@ public class ReserveResponse {
 	public void setTicketId(long ticketId) {
 		this.ticketId = ticketId;
 	}
+
+	@Override
+	public String toString() {
+		return "ReserveResponse [ticketId=" + ticketId + "]";
+	}	
+	
 }
