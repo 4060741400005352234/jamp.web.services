@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.jamp" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.jamp" xmlns:intf="http://service.jamp" xmlns:tns1="http://response.jamp" xmlns:tns2="http://request.jamp" xmlns:tns3="http://dto.model" xmlns:tns4="http://model.jamp" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://service.jamp" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model.jamp"/>
+   <import namespace="http://dto.model"/>
+   <import namespace="http://request.jamp"/>
+   <import namespace="http://response.jamp"/>
+   <element name="returnTicket">
+    <complexType>
+     <sequence>
+      <element name="ticketId" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="returnTicketResponse">
+    <complexType>
+     <sequence>
+      <element name="returnTicketReturn" type="tns1:TicketResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="reserveTicket">
+    <complexType>
+     <sequence>
+      <element name="request" type="tns2:ReserveRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="reserveTicketResponse">
+    <complexType>
+     <sequence>
+      <element name="reserveTicketReturn" type="tns1:ReserveResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTicketInfo">
+    <complexType>
+     <sequence>
+      <element name="request" type="tns2:TicketInfoRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTicketInfoResponse">
+    <complexType>
+     <sequence>
+      <element name="getTicketInfoReturn" type="tns1:TicketinfoResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="payForTicket">
+    <complexType>
+     <sequence>
+      <element name="ticketId" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="payForTicketResponse">
+    <complexType>
+     <sequence>
+      <element name="payForTicketReturn" type="tns1:TicketResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://response.jamp" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model.jamp"/>
+   <import namespace="http://dto.model"/>
+   <import namespace="http://request.jamp"/>
+   <complexType name="TicketResponse">
+    <sequence>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="result" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ReserveResponse">
+    <sequence>
+     <element name="ticketId" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <complexType name="TicketinfoResponse">
+    <sequence>
+     <element name="ticketInfo" nillable="true" type="tns3:TicketInfo"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://dto.model" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model.jamp"/>
+   <import namespace="http://request.jamp"/>
+   <import namespace="http://response.jamp"/>
+   <complexType name="PassangerInfo">
+    <sequence>
+     <element name="dateOfBirth" nillable="true" type="xsd:dateTime"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="patronymic" nillable="true" type="xsd:string"/>
+     <element name="sureName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="TicketInfo">
+    <sequence>
+     <element name="arrivalCity" nillable="true" type="xsd:string"/>
+     <element name="arrivaldate" nillable="true" type="xsd:dateTime"/>
+     <element name="cost" nillable="true" type="xsd:int"/>
+     <element name="departureCity" nillable="true" type="xsd:string"/>
+     <element name="departureDate" nillable="true" type="xsd:dateTime"/>
+     <element name="state" nillable="true" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://request.jamp" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model.jamp"/>
+   <import namespace="http://dto.model"/>
+   <import namespace="http://response.jamp"/>
+   <complexType name="ReserveRequest">
+    <sequence>
+     <element name="passangerInfo" nillable="true" type="tns3:PassangerInfo"/>
+     <element name="ticketInfo" nillable="true" type="tns3:TicketInfo"/>
+    </sequence>
+   </complexType>
+   <complexType name="TicketInfoRequest">
+    <sequence>
+     <element name="ticketId" type="xsd:long"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="reserveTicketResponse">
+
+      <wsdl:part element="impl:reserveTicketResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="returnTicketRequest">
+
+      <wsdl:part element="impl:returnTicket" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="returnTicketResponse">
+
+      <wsdl:part element="impl:returnTicketResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="payForTicketRequest">
+
+      <wsdl:part element="impl:payForTicket" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="reserveTicketRequest">
+
+      <wsdl:part element="impl:reserveTicket" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTicketInfoResponse">
+
+      <wsdl:part element="impl:getTicketInfoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="payForTicketResponse">
+
+      <wsdl:part element="impl:payForTicketResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTicketInfoRequest">
+
+      <wsdl:part element="impl:getTicketInfo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="TicketService">
+
+      <wsdl:operation name="returnTicket">
+
+         <wsdl:input message="impl:returnTicketRequest" name="returnTicketRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:returnTicketResponse" name="returnTicketResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="reserveTicket">
+
+         <wsdl:input message="impl:reserveTicketRequest" name="reserveTicketRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:reserveTicketResponse" name="reserveTicketResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTicketInfo">
+
+         <wsdl:input message="impl:getTicketInfoRequest" name="getTicketInfoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getTicketInfoResponse" name="getTicketInfoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="payForTicket">
+
+         <wsdl:input message="impl:payForTicketRequest" name="payForTicketRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:payForTicketResponse" name="payForTicketResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="TicketServiceSoapBinding" type="impl:TicketService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="returnTicket">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="returnTicketRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="returnTicketResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="reserveTicket">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="reserveTicketRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="reserveTicketResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTicketInfo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTicketInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTicketInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="payForTicket">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="payForTicketRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="payForTicketResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="TicketServiceService">
+
+      <wsdl:port binding="impl:TicketServiceSoapBinding" name="TicketService">
+
+         <wsdlsoap:address location="http://localhost:8080/JampWSWeb/services/TicketService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
