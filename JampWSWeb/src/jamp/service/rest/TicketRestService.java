@@ -1,73 +1,80 @@
 package jamp.service.rest;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import jamp.model.Ticket;
-import jamp.processor.TicketProcessor;
 import jamp.request.ReserveRequest;
+import jamp.request.TicketInfoRequest;
 import jamp.response.ReserveResponse;
+import jamp.response.TicketResponse;
 import jamp.response.TicketinfoResponse;
-import model.mapping.PassangerInfoMapper;
-import model.mapping.TicketInfoMapper;
+import jamp.service.TicketServiceImpl;
 
 @Path("/")
 public class TicketRestService {
 
-	private TicketProcessor processor = new TicketProcessor();
+	private TicketServiceImpl service = new TicketServiceImpl();
 	
 	@POST
 	@Produces({ MediaType.TEXT_PLAIN })
 	@Path("/plain/postTicket")
 	public ReserveResponse reserveTicket(ReserveRequest request) {
-		long result = processor.reservTicket(TicketInfoMapper.mapTicketInfo(request.getTicketInfo()),
-				PassangerInfoMapper.mappassangerInfo(request.getPassangerInfo()));
-
-		ReserveResponse response = new ReserveResponse();
-		response.setTicketId(result);
-
-		return response;
+		return service.reserveTicket(request);
+	}
+	
+	@PUT
+	@Produces({ MediaType.TEXT_PLAIN })
+	@Path("/plain/payForTicket")
+	public TicketResponse payForTicket(long ticketId) {
+		return service.payForTicket(ticketId);
+	}
+	
+	@PUT
+	@Produces({ MediaType.APPLICATION_XML })
+	@Path("/xml/payForTicket")
+	public TicketResponse payForTicketXML(long ticketId) {
+		return service.payForTicket(ticketId);
+	}
+	
+	@DELETE
+	@Produces({ MediaType.APPLICATION_XML })
+	@Path("/xml/returnTicket")
+	public TicketResponse returnTicket(long ticketId) {
+		return service.returnTicket(ticketId);
 	}
 
 	@GET
 	@Produces({ MediaType.TEXT_PLAIN })
 	@Path("/plain/get")
 	public TicketinfoResponse getTicketInfo(@QueryParam("id") long ticketid) {
-		TicketinfoResponse response = new TicketinfoResponse();
-
-		Ticket ticket = processor.getTicket(ticketid);
-		response.setTicketInfo(TicketInfoMapper.mapTicket(ticket));
-
-		return response;
+		TicketInfoRequest request = new TicketInfoRequest();
+		request.setTicketId(ticketid);
+		return service.getTicketInfo(request);
 	}
 	
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/json/get")
 	public TicketinfoResponse getTicketInfoJSON(@QueryParam("id") long ticketid) {
-		TicketinfoResponse response = new TicketinfoResponse();
-
-		Ticket ticket = processor.getTicket(ticketid);
-		response.setTicketInfo(TicketInfoMapper.mapTicket(ticket));
-
-		return response;
+		TicketInfoRequest request = new TicketInfoRequest();
+		request.setTicketId(ticketid);
+		return service.getTicketInfo(request);
 	}
 	
 	@GET
 	@Produces({ MediaType.APPLICATION_XML })
 	@Path("/xml/get")
 	public TicketinfoResponse getTicketInfoXML(@QueryParam("id") long ticketid) {
-		TicketinfoResponse response = new TicketinfoResponse();
-
-		Ticket ticket = processor.getTicket(ticketid);
-		response.setTicketInfo(TicketInfoMapper.mapTicket(ticket));
-
-		return response;
+		TicketInfoRequest request = new TicketInfoRequest();
+		request.setTicketId(ticketid);
+		return service.getTicketInfo(request);
 	}
 
 }

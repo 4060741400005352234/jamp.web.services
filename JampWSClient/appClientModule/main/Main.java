@@ -12,7 +12,7 @@ public class Main {
 		TicketService port = service.getTicketServicePort();
 		
 		TicketInfoRequest reauest = new TicketInfoRequest();
-		reauest.setTicketId(275);
+		reauest.setTicketId(379);
 		
 		TicketinfoResponse response = port.getTicketInfo(reauest);
 		
