@@ -29,6 +29,13 @@ public class TicketRestService {
 		return service.reserveTicket(request);
 	}
 	
+	@POST
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/json/postTicket")
+	public ReserveResponse reserveTicketJSON(ReserveRequest request) {
+		return service.reserveTicket(request);
+	}
+	
 	@PUT
 	@Produces({ MediaType.TEXT_PLAIN })
 	@Path("/plain/payForTicket")
